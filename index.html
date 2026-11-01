@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="HauntScript — a classic Infocom-style text adventure for Kiroween 2026" />
+  <title>HauntScript — Kiroween Resurrection</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="top">
+      <h1>HauntScript</h1>
+      <p class="tagline">A haunted-house text adventure · Kiroween 2026 · Resurrection</p>
+    </header>
+
+    <main>
+      <section id="output" aria-live="polite" aria-label="Story output"></section>
+
+      <form id="cmd-form" autocomplete="off">
+        <label for="cmd" class="sr-only">Command</label>
+        <span class="prompt">&gt;</span>
+        <input id="cmd" type="text" spellcheck="false" placeholder="look, go north, take lantern…" autofocus />
+        <button type="submit">Enter</button>
+      </form>
+
+      <aside id="status" aria-label="Status">
+        <div><strong>Location</strong> <span id="loc">—</span></div>
+        <div><strong>Moves</strong> <span id="moves">0</span></div>
+        <div><strong>Score</strong> <span id="score">0</span> / 100</div>
+      </aside>
+    </main>
+
+    <footer>
+      <p>Type <kbd>help</kbd> for commands. Built for <a href="https://kiroween.devpost.com/" rel="noopener">Kiroween 2026</a>.</p>
+    </footer>
+  </div>
+  <script src="js/game.js"></script>
+</body>
+</html>

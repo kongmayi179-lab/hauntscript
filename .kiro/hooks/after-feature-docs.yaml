@@ -1,0 +1,13 @@
+# Hook: keep specs in sync after feature work
+name: after-feature-docs
+trigger: after-agent-task
+description: >
+  When rooms, verbs, or win logic change, update matching files under
+  .kiro/specs/ and mention the change in KIRO_USAGE.md if workflow impact.
+steps:
+  - id: remind-specs
+    type: agent-instruction
+    prompt: >
+      If you changed parser verbs, room graph, items, or win condition,
+      update .kiro/specs/parser.md, world.md, and/or win-condition.md
+      in the same change set. Do not leave specs stale.

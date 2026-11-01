@@ -1,0 +1,37 @@
+# Hook: pre-commit sanity (Kiroween HauntScript)
+name: pre-commit-sanity
+trigger: before-commit
+description: >
+  Ensure Kiroween eligibility files exist and .kiro is not ignored
+  before allowing a commit.
+steps:
+  - id: check-kiro-dir
+    type: shell
+    run: |
+      test -d .kiro/steering
+      test -d .kiro/specs
+      test -d .kiro/hooks
+  - id: check-kiro-not-ignored
+    type: shell
+    run: |
+      # Fail if .gitignore would ignore .kiro
+      if git check-ignore -q .kiro || git check-ignore -q .kiro/steering; then
+        echo ".kiro must not be gitignored (Kiroween rule)" >&2
+        exit 1
+      fi
+  - id: check-license-readme
+    type: shell
+    run: |
+      test -f LICENSE
+      test -f README.md
+      test -f index.html
+      test -f js/game.js
+  - id: check-no-secrets
+    type: shell
+    run: |
+      if grep -R -E '(api[_-]?key|sk-[a-zA-Z0-9]{20,}|AWS_SECRET)' --include='*.js' --include='*.md' --include='*.html' --include='*.yaml' . ; then
+        echo "Possible secret detected" >&2
+        exit 1
+      fi
+      true
+on_fail: block

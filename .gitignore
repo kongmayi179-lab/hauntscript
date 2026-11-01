@@ -1,0 +1,10 @@
+# Dependencies / build (none required for static Pages deploy)
+node_modules/
+dist/
+.DS_Store
+*.log
+.env
+.env.*
+
+# IMPORTANT: Do NOT ignore .kiro — required for Kiroween eligibility
+# !.kiro/
